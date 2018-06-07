@@ -118,12 +118,19 @@ class PiApp(QMainWindow, combineddialog.Ui_MainWindow):
 
 	def showTime(self):
 		time = QTime.currentTime()
-		text = time.toString('hh:mm')
+		text = time.toString('hh:mm A')
+
+		for char in text:
+			if char in "AMP":
+				text = text.replace(char, "")
+
 		if (time.second() % 2) == 0:
 			text = text[:2] + ' ' + text[3:]
 			
 		self.lcdTime.display(text)
 		self.lcdTimeParts.display(text)
+
+		print(text)
 
 	def tab_change(self):
 
